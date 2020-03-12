@@ -1,0 +1,19 @@
+{
+  "name": "Keycodes",
+  "version": "0.0.1",
+  "description": "Keycodes",
+  "subtitle": "Keycodes",
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/MyApp_56.png",
+    "112": "/MyApp_112.png"
+  },
+  "theme_color": "#65ACFF",
+  "developer": {
+    "name": "John Doe",
+    "url": "http://www.MyWebsite.me"
+  },
+  "type": "web",
+  "fullscreen": "true",
+  "orientation": [ "portrait-primary" ]
+}
