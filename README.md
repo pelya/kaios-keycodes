@@ -6,7 +6,7 @@ To install application.zip to your device, launch command:
 
 git submodule update --init --recursive
 
-Follow instructions in build/make-kaios-install/README.md to download xulrunner with xpcshell tool, and adb tool.
+Follow instructions in make-kaios-install/README.md to download xulrunner with xpcshell tool, and adb tool.
 
 On Debian, you can install adb from system packages:
 
