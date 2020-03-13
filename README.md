@@ -1,10 +1,21 @@
-# JavaScript Keycodes → [KeyCode.info](https://keycode.info)
+Print JavaScript Keycodes in KaiOS
 
-![](http://wes.io/sQyC/content.gif)
+This app also allocates memory until it crashes, to test the limits of your device
 
-A simple webpage that responds to the key pressed and returns the JavaScript 'on-key pressed' keycode.
+To install application.zip to your device, launch command:
 
-## Help Out :ok_hand::ok_hand::ok_hand:
+git submodule update --init --recursive
 
-There are many keys, particularly ones that are on non-English keyboards that I haven't mapped. Please add it to scripts.js and submit a PR! 
+Follow instructions in build/make-kaios-install/README.md to download xulrunner with xpcshell tool, and adb tool.
 
+On Debian, you can install adb from system packages:
+
+sudo apt-get install adb
+
+Enable debug mode in your device by entering secret code on your home screen:
+
+    *#*#33284#*#*
+
+Plug in USB cable, run install.sh
+
+You should see your app in the device app list, install script freezes at the end, you can kill it with Ctrl-C
