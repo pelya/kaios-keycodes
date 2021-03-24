@@ -28,30 +28,6 @@
         }
       },
       "returnValue": false
-    },
-    "share": {
-      "href": "/index.html",
-      "filters": {
-        "type": "application/octet-stream",
-        "url": {
-          "required": true,
-          "pattern": "^.*\\.wad$",
-          "patternFlags": "i"
-        }
-      },
-      "returnValue": false
-    },
-    "view": {
-      "href": "/index.html",
-      "filters": {
-        "type": "url",
-        "url": {
-          "required": true,
-          "pattern": "^.*\\.wad$",
-          "patternFlags": "i"
-        }
-      },
-      "returnValue": false
     }
   }
 }

@@ -59,19 +59,39 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
 
   logMsg("Got activity request: " + String(activityRequest) + " option " + String(source) + " name " + source.name);
 
-  if (option.name === "open") {
+  if (source.name === "open") {
     logMsg("Open WAD");
   }
-  if (option.name === "view") {
+  if (source.name === "view") {
     logMsg("View WAD");
   }
-  if (option.name === "share") {
+  if (source.name === "share") {
     logMsg("Share WAD");
   }
 
-  logMsg("Source url: " + String(source.url));
+  logMsg("Source properties:");
   for (var key of Object.keys(source)) {
-    console.log(key + " -> " + source[key]);
+    logMsg(key + " -> " + source[key]);
   }
+
+  if ("url" in source) {
+    logMsg("Source url: " + String(source.url));
+  } else {
+    logMsg("Source url empty");
+  }
+
+  if ("data" in source) {
+    logMsg("Source data: ");
+    for (var key of Object.keys(source.data)) {
+      logMsg(key + " -> " + source.data[key]);
+    }
+    if ("blob" in source.data && "filename" in source.data) {
+      logMsg("Filename: " + source.data.filename + " size " + source.data.blob.size);
+    }
+  } else {
+    logMsg("Source data empty");
+  }
+
+
 });
 
