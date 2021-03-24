@@ -95,7 +95,7 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
 
       var reader = new FileReader();
       reader.addEventListener("loadend", function() {
-        const view = new Int8Array(reader.result);
+        const view = new Uint8Array(reader.result);
         const bin = [...view].map((n) => n.toString(16)).join(' ');
         logMsg(bin);
       });
