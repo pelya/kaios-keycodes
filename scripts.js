@@ -100,26 +100,6 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
         logMsg(bin);
       });
       reader.readAsArrayBuffer(source.data.blob.slice(0, 20));
-
-      //logMsg("Got file byte[0] " + String(source.data.blob[0]));
-      //logMsg("Got file byte[1] " + String(source.data.blob[1]));
-      //logMsg("Got file byte[len-1] " + String(source.data.blob[source.data.blob.size-1]));
-      /*
-      var reader = source.data.blob.stream().getReader();
-      reader.read().then(function processFileData({ done, value }) {
-        // Result objects contain two properties:
-        // done  - true if the stream has already given you all its data.
-        // value - some data. Always undefined when done is true.
-        if (done) {
-          logMsg("File read complete");
-          return;
-        }
-        logMsg("Got data chunk len " + String(value.length) + " byte[0] " + String(value[0]));
-
-        // Read some more, and call this function again
-        return reader.read().then(processFileData);
-      });
-      */
     }
   } else {
     logMsg("Source data empty");
