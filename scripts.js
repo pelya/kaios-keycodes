@@ -55,15 +55,23 @@ function growMemory() {
 //setInterval(growMemory, 200);
 
 navigator.mozSetMessageHandler('activity', function(activityRequest) {
-  var option = activityRequest.source;
+  var source = activityRequest.source;
 
-  logMsg("Got activity request: " + String(activityRequest) + " option " + String(option) + " name " + option.name);
+  logMsg("Got activity request: " + String(activityRequest) + " option " + String(source) + " name " + source.name);
 
   if (option.name === "open") {
     logMsg("Open WAD");
   }
   if (option.name === "view") {
     logMsg("View WAD");
+  }
+  if (option.name === "share") {
+    logMsg("Share WAD");
+  }
+
+  logMsg("Source url: " + String(source.url));
+  for (var key of Object.keys(source)) {
+    console.log(key + " -> " + source[key]);
   }
 });
 

@@ -20,9 +20,24 @@
     "open": {
       "href": "/index.html",
       "filters": {
-        "type": [
-          "application/octet-stream"
-        ]
+        "type": "application/octet-stream",
+        "url": {
+          "required": true,
+          "pattern": "^.*\\.wad$",
+          "patternFlags": "i"
+        }
+      },
+      "returnValue": false
+    },
+    "share": {
+      "href": "/index.html",
+      "filters": {
+        "type": "application/octet-stream",
+        "url": {
+          "required": true,
+          "pattern": "^.*\\.wad$",
+          "patternFlags": "i"
+        }
       },
       "returnValue": false
     },
