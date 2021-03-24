@@ -1,4 +1,12 @@
 
+function logMsg(text) {
+  console.log(text);
+  var element = document.getElementById('output');
+  if (element) {
+    element.value = text + "\n" + element.value;
+  }
+}
+
 function printKey(e) {
   if (!e.metaKey) {
     e.preventDefault();
@@ -24,10 +32,10 @@ function printKey(e) {
 
   let text = "event.keyCode=" + e.keyCode.toString() + " event.key=" + newKeyText + " event.code=" + newCodeText;
 
-  console.log(text);
-  var element = document.getElementById('output');
-  if (element) {
-    element.value = text + "\n" + element.value;
+  logMsg(text);
+
+  if (newKeyText === "EndCall") {
+    window.open('', '_self').close();
   }
 };
 
@@ -41,10 +49,21 @@ function growMemory() {
     growArray[growArray.length - 1][i] = Math.floor(Math.random() * 256);
   }
   var text = "Allocated " + growArray.length.toString() + " Mb of RAM";
-  var element = document.getElementById('output');
-  if (element) {
-    element.value = text + "\n" + element.value;
-  }
+  logMsg(text);
 }
 
-setInterval(growMemory, 200);
+//setInterval(growMemory, 200);
+
+navigator.mozSetMessageHandler('activity', function(activityRequest) {
+  var option = activityRequest.source;
+
+  logMsg("Got activity request: " + String(activityRequest) + " option " + String(option) + " name " + option.name);
+
+  if (option.name === "open") {
+    logMsg("Open WAD");
+  }
+  if (option.name === "view") {
+    logMsg("View WAD");
+  }
+});
+
