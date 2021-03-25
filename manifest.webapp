@@ -20,8 +20,10 @@
     "open": {
       "href": "/index.html",
       "filters": {
-        "type": "application/octet-stream",
-        "url": {
+        "blob": {
+          "required": true
+        },
+        "filename": {
           "required": true,
           "pattern": "^.*\\.wad$",
           "patternFlags": "i"
