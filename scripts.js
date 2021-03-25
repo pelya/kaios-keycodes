@@ -35,7 +35,7 @@ function printKey(e) {
   logMsg(text);
 
   if (newKeyText === "EndCall") {
-    window.open('', '_self').close();
+    setTimeout(function() { window.open('', '_self').close(); }, 500);
   }
 };
 
@@ -86,6 +86,7 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
     for (var key of Object.keys(source.data)) {
       logMsg(key + " -> " + source.data[key]);
     }
+
     if ("blob" in source.data && "filename" in source.data) {
       logMsg("Source data blob: ");
       for (var key in source.data.blob) {
@@ -100,6 +101,19 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
         logMsg(bin);
       });
       reader.readAsArrayBuffer(source.data.blob.slice(0, 20));
+    }
+
+    if ("blobs" in source.data && "filenames" in source.data) {
+      logMsg("Source data blobs array length: " + source.data.blobs.length);
+      logMsg("Filename: " + source.data.filenames[0] + " size " + source.data.blobs[0].size);
+
+      var reader = new FileReader();
+      reader.addEventListener("loadend", function() {
+        const view = new Uint8Array(reader.result);
+        const bin = [...view].map((n) => n.toString(16)).join(' ');
+        logMsg(bin);
+      });
+      reader.readAsArrayBuffer(source.data.blobs[0].slice(0, 20));
     }
   } else {
     logMsg("Source data empty");

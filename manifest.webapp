@@ -28,6 +28,16 @@
         }
       },
       "returnValue": false
+    },
+    "share": {
+      "href": "/index.html",
+      "blobs": {
+        "required": true
+      },
+      "filenames": {
+        "required": true
+      },
+      "returnValue": false
     }
   }
 }
