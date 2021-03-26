@@ -38,13 +38,39 @@ function printKey(e) {
     setTimeout(function() { window.open('', '_self').close(); }, 500);
   }
 
-  if (newKeyText === "SoftRight" || newKeyText === "SoftLeft") {
+  if (newKeyText === "SoftLeft") {
     const openFileManager = new MozActivity({
       name: "view",
       data: {
         type: "file/path"
       }
     });
+  }
+
+  if (newKeyText === "SoftRight") {
+    const openFileManager = new MozActivity({
+      name: "pick",
+      data: {
+        type: "application/*"
+      }
+    });
+    openFileManager.onsuccess = function() {
+        logMsg("Pick file success");
+        logMsg("Result: " + this.result);
+        for (var key in this.result) {
+          logMsg(key + " -> " + this.result[key]);
+        }
+        logMsg("Result name: " + this.result.filename ? this.result.filename : this.result.name ? this.result.name : this.result.blob.name);
+        logMsg("Result blob: " + this.result.blob);
+        logMsg("Result blob size: " + this.result.blob.size);
+        logMsg("Result blob name: " + this.result.blob.name);
+        for (var key in this.result.blob) {
+          logMsg(key + " -> " + this.result.blob[key]);
+        }
+    };
+    openFileManager.onerror = function() {
+        logMsg("The activity encouter en error: " + this.error);
+    };
   }
 
   if (newKeyText === "Call") {
@@ -126,7 +152,7 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
     if ("blob" in source.data && "filename" in source.data) {
       logMsg("Source data blob: ");
       for (var key in source.data.blob) {
-        logMsg(key);
+        logMsg(key + " -> " + source.data.blob[key]);
       }
       logMsg("Filename: " + source.data.filename + " size " + source.data.blob.size);
 
@@ -142,6 +168,10 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
     if ("blobs" in source.data && "filenames" in source.data) {
       logMsg("Source data blobs array length: " + source.data.blobs.length);
       logMsg("Filename: " + source.data.filenames[0] + " size " + source.data.blobs[0].size);
+      logMsg("Source data blobs[0]: ");
+      for (var key in source.data.blobs[0]) {
+        logMsg(key + " -> " + source.data.blobs[0][key]);
+      }
 
       var reader = new FileReader();
       reader.addEventListener("loadend", function() {
