@@ -37,6 +37,42 @@ function printKey(e) {
   if (newKeyText === "EndCall") {
     setTimeout(function() { window.open('', '_self').close(); }, 500);
   }
+
+  if (newKeyText === "SoftRight" || newKeyText === "SoftLeft") {
+    const openFileManager = new MozActivity({
+      name: "view",
+      data: {
+        type: "file/path"
+      }
+    });
+  }
+
+  if (newKeyText === "Call") {
+    const openFileManager = new MozActivity({
+      name: "pick",
+      data: {
+        type: "file/path"
+      }
+    });
+    openFileManager.onsuccess = function() {
+        logMsg("Pick file success");
+        logMsg("Result: " + this.result);
+        for (var key in this.result) {
+          logMsg(key + " -> " + this.result[key]);
+        }
+        logMsg("Result filename: " + this.result.filename);
+        logMsg("Result url: " + this.result.url);
+        logMsg("Result blob: " + this.result.blob);
+        logMsg("Result blob size: " + this.result.blob.size);
+        logMsg("Result blob name: " + this.result.blob.name);
+        for (var key in this.result.blob) {
+          logMsg(key + " -> " + this.result.blob[key]);
+        }
+    };
+    openFileManager.onerror = function() {
+        logMsg("The activity encouter en error: " + this.error);
+    };
+  }
 };
 
 document.addEventListener('keydown', printKey);

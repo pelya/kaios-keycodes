@@ -37,7 +37,9 @@
         "required": true
       },
       "filenames": {
-        "required": true
+        "required": true,
+        "pattern": "^.*\\.wad$",
+        "patternFlags": "i"
       },
       "returnValue": false
     }
