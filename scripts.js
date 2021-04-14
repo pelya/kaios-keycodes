@@ -74,30 +74,26 @@ function printKey(e) {
   }
 
   if (newKeyText === "Call") {
-    const openFileManager = new MozActivity({
-      name: "pick",
-      data: {
-        type: "file/path"
-      }
-    });
-    openFileManager.onsuccess = function() {
-        logMsg("Pick file success");
-        logMsg("Result: " + this.result);
-        for (var key in this.result) {
-          logMsg(key + " -> " + this.result[key]);
-        }
-        logMsg("Result filename: " + this.result.filename);
-        logMsg("Result url: " + this.result.url);
-        logMsg("Result blob: " + this.result.blob);
-        logMsg("Result blob size: " + this.result.blob.size);
-        logMsg("Result blob name: " + this.result.blob.name);
-        for (var key in this.result.blob) {
-          logMsg(key + " -> " + this.result.blob[key]);
-        }
-    };
-    openFileManager.onerror = function() {
-        logMsg("The activity encouter en error: " + this.error);
-    };
+    const myWorker1 = new Worker("worker1.js");
+    myWorker1.onmessage = function(e) {
+      logMsg("Message from worker1: " + e.data);
+    }
+    logMsg("Started worker1");
+    const myWorker2 = new Worker("worker2.js");
+    myWorker2.onmessage = function(e) {
+      logMsg("Message from worker2: " + e.data);
+    }
+    logMsg("Started worker2");
+    const myWorker3 = new Worker("worker3.js");
+    myWorker3.onmessage = function(e) {
+      logMsg("Message from worker3: " + e.data);
+    }
+    logMsg("Started worker3");
+    const myWorker4 = new Worker("worker4.js");
+    myWorker4.onmessage = function(e) {
+      logMsg("Message from worker4: " + e.data);
+    }
+    logMsg("Started worker4");
   }
 };
 
