@@ -1,4 +1,6 @@
 
+var myWorker1 = null;
+
 function logMsg(text) {
   console.log(text);
   var element = document.getElementById('output');
@@ -74,7 +76,7 @@ function printKey(e) {
   }
 
   if (newKeyText === "Call") {
-    const myWorker1 = new Worker("worker1.js");
+    myWorker1 = new Worker("worker1.js");
     myWorker1.onmessage = function(e) {
       logMsg("Message from worker1: " + e.data);
     }
@@ -94,6 +96,13 @@ function printKey(e) {
       logMsg("Message from worker4: " + e.data);
     }
     logMsg("Started worker4");
+  }
+
+  if (newKeyText === "1") {
+    if (myWorker1) {
+      logMsg("Sending message to worker1");
+      myWorker1.postMessage("Msg from main thread", []);
+    }
   }
 };
 

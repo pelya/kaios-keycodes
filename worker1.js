@@ -4,14 +4,18 @@ var nextTerm = 0;
 var i = 0;
 var t = Date.now();
 
-while (true) {
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
-    if (Date.now() > t + 5000) {
-        t = Date.now();
-        postMessage('Worker 1 counter ' + i + ' result ' + n1);
+onmessage = function (msg) {
+    console.log('Worker1 received message:', msg.data);
+    t = Date.now();
+    while (true) {
+        nextTerm = n1 + n2;
+        n1 = n2;
+        n2 = nextTerm;
+        if (Date.now() > t + 2000) {
+            break;
+        }
+        i += 1;
     }
-    i += 1;
-}
 
+    postMessage("Worker1 onmessage response, counter " + i + ' result ' + n1, []);
+}

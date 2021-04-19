@@ -8,7 +8,7 @@ while (true) {
     nextTerm = n1 + n2;
     n1 = n2;
     n2 = nextTerm;
-    if (Date.now() > t + 5000) {
+    if (Date.now() > t + 14000) {
         t = Date.now();
         postMessage('Worker 2 counter ' + i + ' result ' + n1);
     }
