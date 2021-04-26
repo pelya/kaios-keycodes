@@ -1,5 +1,6 @@
 
 var myWorker1 = null;
+var newWindow = null;
 
 function logMsg(text) {
   console.log(text);
@@ -8,6 +9,14 @@ function logMsg(text) {
     element.value = text + "\n" + element.value;
   }
 }
+
+window.addEventListener("error", function (e) {
+   alert("Error occurred: " + e.error.message);
+   return false;
+});
+window.addEventListener('unhandledrejection', function (e) {
+  alert("Error occurred: " + e.reason.message);
+});
 
 function printKey(e) {
   if (!e.metaKey) {
@@ -80,6 +89,12 @@ function printKey(e) {
     myWorker1.onmessage = function(e) {
       logMsg("Message from worker1: " + e.data);
     }
+    myWorker1.onerror = function(e) {
+      logMsg("Error from worker1: " + e.data);
+    }
+    myWorker1.onmessageerror = function(e) {
+      logMsg("Message error from worker1: " + e.data);
+    }
     logMsg("Started worker1");
     const myWorker2 = new Worker("worker2.js");
     myWorker2.onmessage = function(e) {
@@ -103,6 +118,22 @@ function printKey(e) {
       logMsg("Sending message to worker1");
       myWorker1.postMessage("Msg from main thread", []);
     }
+  }
+  if (newKeyText === "2") {
+    if (myWorker1) {
+      logMsg("Sending message to worker1");
+      myWorker1.postMessage("2", []);
+    }
+  }
+  if (newKeyText === "3") {
+    if (myWorker1) {
+      logMsg("Killing worker1");
+      myWorker1.terminate();
+      myWorker1 = null;
+    }
+  }
+  if (newKeyText === "4") {
+    newWindow = window.open("/index2.html", "Index2");
   }
 };
 
@@ -196,3 +227,18 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
 
 });
 
+try {
+  logMsg("window.performance.memory.jsHeapSizeLimit: " + window.performance.memory.jsHeapSizeLimit);
+} catch(e) {}
+try {
+  logMsg("navigator.deviceMemory: " + navigator.deviceMemory);
+} catch(e) {}
+try {
+  logMsg("window.isSecureContext: " + window.isSecureContext);
+} catch(e) {}
+try {
+  logMsg("self.isSecureContext: " + self.isSecureContext);
+} catch(e) {}
+try {
+  logMsg("isSecureContext: " + isSecureContext);
+} catch(e) {}

@@ -13,7 +13,12 @@
     "name": "John Doe",
     "url": "http://www.MyWebsite.me"
   },
+  "origin": "app://keycodes.me",
   "type": "web",
+  "permissions": {
+    "mobiledata":{},
+    "wifidata":{}
+  },
   "fullscreen": "true",
   "orientation": [ "portrait-primary" ],
   "activities": {
