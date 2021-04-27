@@ -135,6 +135,19 @@ function printKey(e) {
   if (newKeyText === "4") {
     newWindow = window.open("/index2.html", "Index2");
   }
+  if (newKeyText === "5") {
+    var now5sec = new Date();
+    now5sec.setSeconds(now5sec.getSeconds() + 5);
+    var alarmData = { d: 'Alarm data' };
+    var newAlarm = navigator.mozAlarms.add(now5sec, 'ignoreTimezone', alarmData);
+    newAlarm.onsuccess = function() {
+      logMsg('The alarm has been scheduled');
+      //window.open('', '_self').close();
+    };
+    newAlarm.onerror = function() {
+      logMsg('Cannot set alarm: ' + this.error.name);
+    };
+  }
 };
 
 document.addEventListener('keydown', printKey);
@@ -228,6 +241,11 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
 });
 
 try {
+  navigator.getFeature('hardware.memory').then((memOnDevice) => {
+    logMsg("hardware.memory: " + memOnDevice);
+  });
+} catch(e) {}
+try {
   logMsg("window.performance.memory.jsHeapSizeLimit: " + window.performance.memory.jsHeapSizeLimit);
 } catch(e) {}
 try {
@@ -242,3 +260,7 @@ try {
 try {
   logMsg("isSecureContext: " + isSecureContext);
 } catch(e) {}
+
+navigator.mozSetMessageHandler('alarm', function(mozAlarm) {
+  logMsg('Alarm received:', JSON.stringify(mozAlarm.data));
+});

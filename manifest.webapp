@@ -17,7 +17,8 @@
   "type": "web",
   "permissions": {
     "mobiledata":{},
-    "wifidata":{}
+    "wifidata":{},
+    "alarms":{}
   },
   "fullscreen": "true",
   "orientation": [ "portrait-primary" ],
@@ -48,5 +49,10 @@
       },
       "returnValue": false
     }
-  }
+  },
+  "messages": [
+    {
+      "alarm": "/index.html"
+    }
+  ]
 }
