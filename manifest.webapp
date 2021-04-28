@@ -14,11 +14,12 @@
     "url": "http://www.MyWebsite.me"
   },
   "origin": "app://keycodes.me",
-  "type": "web",
+  "type": "privileged",
   "permissions": {
-    "mobiledata":{},
-    "wifidata":{},
-    "alarms":{}
+    "mobiledata": {},
+    "wifidata": {},
+    "feature-detection": {},
+    "alarms": {}
   },
   "fullscreen": "true",
   "orientation": [ "portrait-primary" ],

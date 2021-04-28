@@ -241,6 +241,10 @@ navigator.mozSetMessageHandler('activity', function(activityRequest) {
 });
 
 try {
+  logMsg("navigator.getFeature: " + String(navigator.getFeature));
+  logMsg("navigator.getFeature('hardware.memory'): " + String(navigator.getFeature('hardware.memory')));
+} catch(e) {}
+try {
   navigator.getFeature('hardware.memory').then((memOnDevice) => {
     logMsg("hardware.memory: " + memOnDevice);
   });
